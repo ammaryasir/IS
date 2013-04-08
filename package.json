@@ -1,0 +1,28 @@
+{
+  "name": "Node-warehouse",
+  "description": "Online warehouse",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "3.x",
+    "mongodb": "1.1.8",
+    "socket.io": "0.9.10"
+  },
+  "engines": {
+    "node": "0.8.4",
+    "npm": "1.1.49"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "readmeFilename": "readme.md",
+  "gitHead": "e249ca3be83e75a26710d81ce5ad95c3404f78d5",
+  "main": "server.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ccoenraets/nodecellar.git"
+  },
+  "author": "",
+  "license": "BSD"
+}
