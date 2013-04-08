@@ -25,6 +25,13 @@ window.ShelfView = Backbone.View.extend({
     tagName: "div",
 
     className: "span2",
+    
+    initialize : function() {
+	var self = this;
+	_.bindAll(this, "render");
+	this.model.bind('change', self.render);
+    },
+
 
     render: function () {
 	var boxes = this.model.get("boxes");
@@ -52,7 +59,6 @@ window.MoveBoxView = Backbone.View.extend({
     className: "span2",
     render: function () {
         $(this.el).html(this.template());
-	console.log(parent);
         return this;
     },
     events: {

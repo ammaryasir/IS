@@ -31,7 +31,7 @@ window.Shelf = Backbone.Model.extend({
                 ret.isValidPop = false
 		message: "Shelf empty";
 	    }
-	    if(value < 2)
+	    if(value < 20)
 		ret.isValidPush = true;
 	    else {
                 ret.isValidPush = false
@@ -77,10 +77,8 @@ window.Shelf = Backbone.Model.extend({
     defaults: 
 	function() {
             return {
-		boxCount: 0,
+		totalboxes: 0,
 		maxBox: 20,
-		avgItems: 0,
-		maxItems: null,
 		boxes : function() {return new BoxCollection}, 
             };
         }

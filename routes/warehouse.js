@@ -48,46 +48,6 @@ exports.updateInbox = function(req, res) {
     });
 }
 
-exports.addBoxToShelf = function(req, res) {
-    var box = req.body;
-    saveBox(box,res);
-}
-
-var saveBox = function(box,res) {
-    var shelf = box.toShelf;
-    var items = box.items;
-    shelf = "Shelf " + shelf;
-
-    delete box.toShelf;
-    console.log(JSON.stringify(box));
-    console.log("Saving Box to " + shelf);
-    db.collection('warehouse', function(err, collection) {
-        collection.update({'name': shelf, 'totalboxes' :{$lt : 2}}, {'$push' : {'boxes' : box}}, {safe:true}, function(err, result) {
-            if (err) {
-                console.log('Error moving box: ' + err);
-                res.send({'error':'An error has occurred'});
-            } else {
-		if(!result) {
-       		    res.send({'error':true});
-		    return false;
-		}
-	
-   		db.collection('warehouse', function(err, collection) {
-		        collection.update({'name': shelf},{$inc : {"totalboxes" : 1} }, {new: true}, function(err, inbox) {
-		            if (err) {
-  		              console.log('Error updating ' + shelf + err);
-		                res.send({'error':'An error has occurred in updating maxitem'});
-		            } else {
-				console.log(shelf + ' statistics updated' );
-				res.send(inbox);
-		            }
-		        });
-		});
-            }
-        });
-    });
-};
-
 exports.getWarehouse = function(req, res) {
     console.log('Retrieving warehouse');
      db.collection('warehouse', function(err, collection) {
@@ -111,6 +71,48 @@ exports.moveBox = function(req, res) {
         });
     });
 };
+
+exports.addBoxToShelf = function(req, res) {
+    var box = req.body;
+    saveBox(box,res);
+}
+
+var saveBox = function(box,res) {
+    var shelf = box.toShelf;
+    var items = box.items;
+    shelf = "Shelf " + shelf;
+
+    delete box.toShelf;
+    console.log(JSON.stringify(box));
+    console.log("Saving Box to " + shelf);
+    db.collection('warehouse', function(err, collection) {
+        collection.update({'name': shelf, 'totalboxes' :{$lt : 20}}, {'$push' : {'boxes' : box}}, {safe:true}, function(err, result) {
+            if (err) {
+                console.log('Error moving box: ' + err);
+                res.send({'error':'An error has occurred'});
+            } else {
+		if(!result) {
+       		    res.send({'error':true});
+		    return false;
+		}
+	
+   		db.collection('warehouse', function(err, collection) {
+		        collection.update({'name': shelf},{$inc : {"totalboxes" : 1} }, {new: true}, function(err, inbox) {
+		            if (err) {
+  		              console.log('Error updating ' + shelf + err);
+		                res.send({'error':'An error has occurred in updating totalboxes'});
+		            } else {
+				console.log(shelf + ' statistics updated' );
+				res.send(inbox);
+		            }
+		        });
+		});
+            }
+        });
+    });
+};
+
+
 /*--------------------------------------------------------------------------------------------------------------------*/
 // Populate database with sample data -- Only used once: the first time the application is started.
 // You'd typically not find this code in a real-life app, since the database would already exist.
