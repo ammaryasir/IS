@@ -4,4 +4,4 @@
 
 The application allows you to receive a box of items and allows you to store the items across 5 shelfs in the warehouse, as well as showing the statistics for the warehouse.
 
-The application is also hosted online. You can test it [here](http://web.iiit.ac.in/yasir/IS).
+The application is also hosted online. You can test it [here](http://esagu.in:3001).
