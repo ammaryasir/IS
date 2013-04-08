@@ -38,7 +38,7 @@ exports.updateInbox = function(req, res) {
     db.collection('boxes', function(err, collection) {
         collection.update({'_id':new BSON.ObjectID(id)}, inbox, {safe:true}, function(err, result) {
             if (err) {
-                console.log('Error updating wine: ' + err);
+                console.log('Error updating Inbox: ' + err);
                 res.send({'error':'An error has occurred'});
             } else {
                 console.log('' + result + ' document(s) updated');

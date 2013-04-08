@@ -16,8 +16,6 @@ window.WarehouseView = Backbone.View.extend({
         }
         $(this.el).append('<div class="span2"> </div>');
         $(this.el).append(new MoveBoxView({model:this.model}).render().el);
-
-        return this;
     },
 
 
@@ -89,7 +87,6 @@ window.MoveBoxView = Backbone.View.extend({
 	shelfs[to].get("boxes").push(newBox);
 	shelfs[to].set({"totalboxes" : len + 1});
 	shelfs[to].save();	
-	parent.render();	
         app.navigate('warehouse', false);
 	
     }
