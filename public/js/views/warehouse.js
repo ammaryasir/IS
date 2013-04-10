@@ -94,6 +94,6 @@ window.MoveBoxView = Backbone.View.extend({
 	shelfs[to].set({"totalboxes" : len + 1});
 	shelfs[to].save();	
         app.navigate('warehouse', false);
-	
+	socket.emit('dbupdate');
     }
 });

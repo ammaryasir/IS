@@ -56,7 +56,15 @@
 <script src="lib/underscore-min.js"></script>
 <script src="lib/backbone-min.js"></script>
 <script src="lib/bootstrap.min.js"></script>
+<script src="lib/socket.io.js"></script>
 
+<script>
+  var socket = io.connect('http://localhost:3001');
+  socket.on('updates', function (data) {
+    alert(data.message);
+    location.reload();
+  });
+</script>
 <script src="js/utils.js"></script>
 <script src="js/models/models.js"></script>
 <script src="js/views/header.js"></script>
@@ -66,6 +74,9 @@
 <script src="js/views/statistics.js"></script>
 <script src="js/views/about.js"></script>
 <script src="js/main.js"></script>
+
+<script src="/socket.io/socket.io.js"></script>
+
 
 </body>
 </html>

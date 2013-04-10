@@ -1,6 +1,7 @@
 var express = require('express'),
     path = require('path'),
     http = require('http'),
+    io = require('socket.io'),
     warehouse = require('./routes/warehouse');
 
 var app = express();
@@ -18,6 +19,17 @@ app.post('/inbox', warehouse.addBoxToShelf);
 app.get('/warehouse', warehouse.getWarehouse);
 app.put('/warehouse', warehouse.moveBox);
 
-http.createServer(app).listen(app.get('port'), function () {
-    console.log("Express server listening on port " + app.get('port'));
+var server = http.createServer(app);
+
+var sio = io.listen(server);
+
+server.listen(app.get('port'), function(){
+  console.log("Express server listening on port " + app.get('port'));
+});
+
+sio.sockets.on('connection', function (socket) {
+  socket.emit('news', { hello: 'world' });
+  socket.on('dbupdate', function (data) {
+    socket.broadcast.emit('updates', {'message':'Warehouse updated! Reloading'});
+  });
 });
