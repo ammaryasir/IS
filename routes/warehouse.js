@@ -51,7 +51,7 @@ exports.updateInbox = function(req, res) {
 exports.getWarehouse = function(req, res) {
     console.log('Retrieving warehouse');
      db.collection('warehouse', function(err, collection) {
-        collection.find().sort({'_id':1}).toArray(function(err, items) {
+        collection.find().sort({'name':1}).toArray(function(err, items) {
             res.send(items);
         });
     });
@@ -74,10 +74,6 @@ exports.moveBox = function(req, res) {
 
 exports.addBoxToShelf = function(req, res) {
     var box = req.body;
-    saveBox(box,res);
-}
-
-var saveBox = function(box,res) {
     var shelf = box.toShelf;
     var items = box.items;
     shelf = "Shelf " + shelf;
@@ -97,13 +93,13 @@ var saveBox = function(box,res) {
 		}
 	
    		db.collection('warehouse', function(err, collection) {
-		        collection.update({'name': shelf},{$inc : {"totalboxes" : 1} }, {new: true}, function(err, inbox) {
+		        collection.update({'name': shelf},{$inc : {"totalboxes" : 1} }, {new: true}, function(err, updated) {
 		            if (err) {
   		              console.log('Error updating ' + shelf + err);
 		                res.send({'error':'An error has occurred in updating totalboxes'});
 		            } else {
 				console.log(shelf + ' statistics updated' );
-				res.send(inbox);
+				res.send(true);
 		            }
 		        });
 		});

@@ -37,14 +37,6 @@ var AppRouter = Backbone.Router.extend({
         this.headerView.selectMenuItem();
     },
 
-    statistics: function (id) {
-        var warehouse = new Warehouse();
-	warehouse.fetch({success: function(){
-            $("#content").html(new StatisticsView({model: warehouse}).el);
-        }});
-        this.headerView.selectMenuItem();
-    },
-
     about: function () {
         if (!this.aboutView) {
             this.aboutView = new AboutView();
@@ -55,7 +47,7 @@ var AppRouter = Backbone.Router.extend({
 
 });
 
-utils.loadTemplate(['HomeView', 'HeaderView', 'InboxView', 'BoxView','MoveBoxView','ShelfStatisticsView','AboutView'], function() {
+utils.loadTemplate(['HomeView', 'HeaderView', 'InboxView', 'BoxView','ShelfStatisticsView','AboutView'], function() {
     app = new AppRouter();
     Backbone.history.start();
 });

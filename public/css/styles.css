@@ -123,3 +123,36 @@ legend {
     margin-top: 0px;
     margin-bottom: 0px;
 }
+
+.box {
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    height: 40px;
+    line-height: 40px;
+    text-align:center;
+    position: relative;
+    width: 100%;    
+    background: #dff0d8;
+    border-color: #468847;
+}
+
+.shelf {
+    text-align:center;
+    margin-left:auto;
+    margin-right:auto;
+    display: inline-block;
+    vertical-align:top;
+}
+
+.recyclebin {
+    text-align:center;
+    margin-left:auto;
+    margin-right:auto;
+    display: inline-block;
+    background : #b94a48;
+    border-color: #b94a48;
+    border-radius: 5px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
