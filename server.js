@@ -29,6 +29,6 @@ server.listen(app.get('port'), function(){
 
 sio.sockets.on('connection', function (socket) {
   socket.on('dbupdate', function (data) {
-    socket.broadcast.emit('updates', {'message':'Warehouse updated! Reloading'});
+    socket.broadcast.emit('updates', {'message':'Warehouse updated! Reloading!'});
   });
 });
