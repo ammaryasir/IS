@@ -30,7 +30,7 @@ window.InboxView = Backbone.View.extend({
                 utils.showAlert('Error', 'An error occurred while trying to update inbox', 'alert-error');
             }
     	});
-	socket.emit('dbupdate');
+	socket.emit('dbupdate',{model:'inbox'});
    },
    
    saveBox: function(event) {
@@ -67,7 +67,8 @@ window.InboxView = Backbone.View.extend({
                 self.render();
                 app.navigate('inbox', false);
                 utils.showAlert('Success!', 'Box moved successfully', 'alert-success');
-		socket.emit('dbupdate');
+		socket.emit('dbupdate',{'model':'warehouse'});
+		socket.emit('dbupdate',{'model':'inbox'});
             },
             error: function () {
                 utils.showAlert('Error', 'An error occurred while trying to move this box', 'alert-error');

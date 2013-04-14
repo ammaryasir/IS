@@ -5,7 +5,7 @@ window.WarehouseView = Backbone.View.extend({
   
     initialize: function () {
 	this.render();
-	 var self = this;
+	var self = this;
         _.bindAll(this, "render");
         this.model.bind('change', self.render);
     },
@@ -49,7 +49,7 @@ window.WarehouseView = Backbone.View.extend({
 		shelfs[to].set({"totalboxes" : len3 + 1});
 		shelfs[to].save();	
      	        app.navigate('warehouse', false);
-		socket.emit('dbupdate');
+		socket.emit('dbupdate',{'model':'warehouse'});
             }
         });
         $('.recyclebin',this.el).droppable({
@@ -60,7 +60,7 @@ window.WarehouseView = Backbone.View.extend({
 		shelfs[from].set({"totalboxes" : len4 - 1});
 		shelfs[from].save();
      	        app.navigate('warehouse', false);
-		socket.emit('dbupdate');
+		socket.emit('dbupdate',{'model':'warehouse'});
                 return false;
 	    }
 	});

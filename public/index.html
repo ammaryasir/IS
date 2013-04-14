@@ -59,14 +59,11 @@
 <script src="lib/underscore-min.js"></script>
 <script src="lib/backbone-min.js"></script>
 <script src="lib/bootstrap.min.js"></script>
+<script src="https://raw.github.com/makeusabrew/bootbox/v3.2.0/bootbox.min.js"></script>
 <script src="lib/socket.io.js"></script>
 
 <script>
   var socket = io.connect('http://localhost:3001');
-  socket.on('updates', function (data) {
-    alert(data.message);
-    location.reload();
-  });
 </script>
 <script src="js/utils.js"></script>
 <script src="js/models/models.js"></script>

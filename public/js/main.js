@@ -24,9 +24,21 @@ var AppRouter = Backbone.Router.extend({
     inbox: function (id) {
         var box = new Box();
 	box.fetch({success: function(){
-            $("#content").html(new InboxView({model: box}).el);
+	    var view = new InboxView({model:box});
+            $("#content").html(view.el);
         }});
         this.headerView.selectMenuItem();
+	socket.on('updates', function (data) {
+	    if(data.model == 'inbox') { 
+	        box.fetch({success: function(){
+		    bootbox.alert("Inbox has been updated since last use!")
+		    setTimeout(function() { bootbox.hideAll();}, 3000);
+	            var view = new InboxView({model:box});
+                    $("#content").html(view.el);
+                }});
+
+	    }
+        });
     },
     
     warehouse: function (id) {
@@ -35,6 +47,16 @@ var AppRouter = Backbone.Router.extend({
             $("#content").html(new WarehouseView({model: warehouse}).el);
         }});
         this.headerView.selectMenuItem();
+	socket.on('updates', function (data) {
+	    if(data.model == 'warehouse') { 
+	        warehouse.fetch({success: function(){
+		    bootbox.alert("Warehouse has been updated since last use!");
+		    setTimeout(function() { bootbox.hideAll();}, 3000);
+	            var view = new WarehouseView({model:warehouse});
+                    $("#content").html(view.el);
+                }});
+	    }
+        });
     },
 
     about: function () {
